@@ -1,0 +1,160 @@
+.form-auth {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	width: 400px;
+	margin: 80px auto 0 auto;
+
+	@media screen and (--mobile) {
+		width: 100%;
+		margin-top: 0;
+	}
+
+	& .logo {
+		@media screen and (--mobile) {
+			margin: -4px auto 0 auto;
+		}
+	}
+}
+
+.form-basic {
+	display: block;
+}
+
+.form-signup {
+	& .title {
+		font-size: 32px;
+		font-weight: bold;
+		line-height: 1.25;
+		color: var('--darkBlack');
+		margin-top: 49px;
+
+		@media screen and (--mobile) {
+			margin-top: 52px;
+		}
+	}
+
+	& > .buttons {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 24px;
+
+		& .social-button {
+			width: calc(50% - 4px);
+			height: 48px;
+		}
+
+		& .text {
+			font-size: 14px;
+			font-weight: 500;
+			line-height: 1.71;
+			height: 40px;
+			padding: 0;
+			min-width: 32px;
+		}
+	}
+
+	& .singel-btn {
+		width: 100%;
+
+		& .text {
+			font-size: 14px;
+			font-weight: 500;
+			line-height: 1.71;
+			height: 40px;
+			padding: 0;
+		}
+	}
+
+	& > .division {
+		display: flex;
+		align-items: center;
+		margin-top: 24px;
+
+		& > span {
+			margin: 0 16px;
+			font-size: 14px;
+			font-weight: 500;
+			line-height: 1.71;
+			text-align: center;
+			color: var(--darkGray);
+		}
+	}
+
+	& .big-margin {
+		margin-top: 24px;
+	}
+
+	& .small-margin {
+		margin-top: 16px;
+	}
+
+	& .password-box {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 16px;
+
+		& > div {
+			width: calc(50% - 8px);
+		}
+	}
+}
+
+.form-signup-footer {
+	margin-top: 48px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.57;
+	color: var('--darkBlack');
+
+	@media screen and (--mobile) {
+		margin-top: 111px;
+		text-align: center;
+	}
+
+	& button {
+		color: var('--linkBlue');
+		text-decoration: none;
+		outline: none;
+		background-color: transparent;
+		border: none;
+		padding: 0;
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 1.57;
+		cursor: pointer;
+	}
+}
+
+.form-login-footer {
+	margin-top: 48px;
+
+	@media screen and (--mobile) {
+		margin-top: 49px;
+		text-align: center;
+	}
+
+	& button {
+		color: var('--linkBlue');
+		text-decoration: none;
+		outline: none;
+		background-color: transparent;
+		border: none;
+		padding: 0;
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 1.57;
+		cursor: pointer;
+	}
+
+	& .login-foot-margin {
+		margin-top: 12px;
+	}
+
+	& .item {
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 1.57;
+		color: var('--darkBlack');
+	}
+}

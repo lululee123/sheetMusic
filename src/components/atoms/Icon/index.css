@@ -1,0 +1,23 @@
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+
+	&.normal {
+		width: 24px;
+	}
+
+	&.small {
+		width: 16px;
+	}
+
+	&.clickable {
+		cursor: pointer;
+	}
+
+	& > svg {
+		width: 100%;
+		height: auto;
+	}
+}

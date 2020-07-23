@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`__interactive 1`] = `
+<DocumentFragment>
+  <button
+    class="button buttonFacebook"
+    type="button"
+  >
+    <test-file-stub />
+    <div
+      class="main"
+    >
+      <span>
+        Facebook 註冊
+      </span>
+    </div>
+  </button>
+</DocumentFragment>
+`;

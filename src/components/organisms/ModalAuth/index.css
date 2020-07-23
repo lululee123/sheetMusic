@@ -1,0 +1,60 @@
+.modal-auth {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	min-height: 700px;
+	position: absolute;
+	top: 0;
+
+	& .left {
+		width: 400px;
+
+		@media screen and (--mobile) {
+			display: none;
+		}
+
+		& .image {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	& .right {
+		width: calc(100% - 400px);
+		padding: 24px;
+		position: relative;
+
+		@media screen and (--mobile) {
+			padding: 34px 15px;
+			width: 345px;
+			box-sizing: content-box;
+			margin: 0 auto;
+		}
+
+		& .back-btn {
+			float: left;
+
+			@media screen and (--mobile) {
+				position: absolute;
+				top: 34px;
+				left: 15px;
+				z-index: 1;
+				cursor: pointer;
+			}
+		}
+
+		& .close-btn {
+			float: right;
+
+			@media screen and (--mobile) {
+				position: absolute;
+				top: 34px;
+				right: 15px;
+				z-index: 1;
+				cursor: pointer;
+			}
+		}
+	}
+}

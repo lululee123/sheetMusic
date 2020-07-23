@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`__interactive 1`] = `
+<DocumentFragment>
+  <div
+    style="margin-top: 20px;"
+  >
+    <div
+      class="division"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`with vertical 1`] = `
+<DocumentFragment>
+  <div
+    style="margin-left: 20px; height: 100vh;"
+  >
+    <div
+      class="division vertical"
+    />
+  </div>
+</DocumentFragment>
+`;

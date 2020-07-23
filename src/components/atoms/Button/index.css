@@ -1,0 +1,313 @@
+/* stylelint-disable no-descending-specificity */
+.button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+	cursor: pointer;
+	background-color: transparent;
+	padding: 0;
+	border: none;
+	transition: opacity 0.3s ease;
+
+	& > .main {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex: 1;
+		flex-shrink: 0;
+		padding: 0 22.5px;
+		border-radius: 2px;
+		border-top: 1px solid var(--blue);
+		border-bottom: 1px solid var(--blue);
+		background-color: var(--blue);
+		color: white;
+		transition: all 0.3s ease;
+
+		& > span {
+			font-size: 16px;
+			font-weight: 500;
+			font-stretch: normal;
+			font-style: normal;
+			line-height: 1.5;
+			letter-spacing: normal;
+			text-align: center;
+		}
+	}
+
+	& > .feather-icon {
+		display: inline-flex;
+		flex-shrink: 0;
+		height: 100%;
+
+		&.large > svg {
+			height: 48px;
+		}
+
+		&.normal > svg {
+			height: 40px;
+		}
+
+		&.small > svg {
+			height: 32px;
+		}
+
+		& > svg {
+			width: auto;
+			margin-left: -1px;
+
+			& > g {
+				fill: var(--blue);
+				transition: fill 0.3s ease;
+
+				& path {
+					stroke: var(--blue);
+					transition: stroke 0.3s ease;
+				}
+			}
+		}
+
+		&.outline {
+			& > svg g {
+				fill: transparent;
+
+				& path {
+					stroke: var(--blue);
+				}
+			}
+		}
+	}
+
+	&.large {
+		& > .main {
+			height: 48px;
+		}
+	}
+
+	&.normal {
+		& > .main {
+			height: 40px;
+		}
+	}
+
+	&.small {
+		& > .main {
+			height: 32px;
+
+			& > span {
+				font-size: 14px;
+			}
+		}
+	}
+
+	&.feather {
+		& > .main {
+			padding: 10.5px 0;
+			border-radius: 0;
+		}
+	}
+
+	&.outline {
+		& > .main {
+			border-radius: 0;
+			background-color: transparent;
+			color: var(--blue);
+		}
+	}
+
+	&.link {
+		& > .main {
+			border-radius: 0;
+			border: none;
+			padding: 0;
+			height: auto;
+			background-color: transparent;
+			color: var(--blue);
+		}
+	}
+
+	&.white {
+		& > .main {
+			border-top: 1px solid white;
+			border-bottom: 1px solid white;
+			background-color: white;
+			color: var(--blue);
+		}
+
+		& > .feather-icon {
+			& > svg g {
+				fill: white;
+
+				& path {
+					stroke: white;
+				}
+			}
+
+			&.outline {
+				& > svg g {
+					& path {
+						stroke: white;
+					}
+				}
+			}
+		}
+
+		&.link {
+			& > .main {
+				border: none;
+				background-color: transparent;
+				color: white;
+			}
+		}
+	}
+
+	&.disabled {
+		cursor: not-allowed;
+
+		& > .main {
+			border-top: 1px solid var(--lightBlue);
+			border-bottom: 1px solid var(--lightBlue);
+			background-color: var(--lightBlue);
+		}
+
+		&.link {
+			& > .main {
+				border: none;
+				background-color: transparent;
+				color: var(--lightBlue);
+			}
+		}
+
+		& > .feather-icon {
+			& > svg g {
+				fill: var(--lightBlue);
+
+				& path {
+					stroke: var(--lightBlue);
+				}
+			}
+
+			&.outline {
+				& > svg g {
+					& path {
+						stroke: var(--lightBlue);
+					}
+				}
+			}
+		}
+	}
+
+	&:hover {
+		& > .main {
+			border-top: 1px solid var(--darkBlue);
+			border-bottom: 1px solid var(--darkBlue);
+			background-color: var(--darkBlue);
+		}
+
+		& > .feather-icon {
+			& > svg {
+				& > g {
+					fill: var(--darkBlue);
+
+					& path {
+						stroke: var(--darkBlue);
+					}
+				}
+			}
+
+			&.outline {
+				& > svg g {
+					fill: transparent;
+
+					& path {
+						stroke: var(--darkBlue);
+					}
+				}
+			}
+		}
+
+		&.outline {
+			& > .main {
+				color: var(--darkBlue);
+				background-color: transparent;
+			}
+		}
+
+		&.link {
+			& > .main {
+				color: var(--darkBlue);
+				background-color: transparent;
+				border: none;
+			}
+		}
+
+		&.white {
+			& > .main {
+				border-top: 1px solid white;
+				border-bottom: 1px solid white;
+				background-color: white;
+				color: var(--blue);
+			}
+
+			& > .feather-icon {
+				& > svg g {
+					fill: white;
+
+					& path {
+						stroke: white;
+					}
+				}
+
+				&.outline {
+					& > svg g {
+						& path {
+							stroke: white;
+						}
+					}
+				}
+			}
+
+			&.link {
+				& > .main {
+					border: none;
+					background-color: transparent;
+					color: white;
+				}
+			}
+		}
+
+		&.disabled {
+			& > .main {
+				border-top: 1px solid var(--lightBlue);
+				border-bottom: 1px solid var(--lightBlue);
+				background-color: var(--lightBlue);
+			}
+
+			&.link {
+				& > .main {
+					color: var(--lightBlue);
+				}
+			}
+
+			& > .feather-icon {
+				& > svg g {
+					fill: var(--lightBlue);
+
+					& path {
+						stroke: var(--lightBlue);
+					}
+				}
+
+				&.outline {
+					& > svg g {
+						& path {
+							stroke: var(--lightBlue);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/* stylelint-enable no-descending-specificity */

@@ -1,0 +1,559 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`with type forget 1`] = `
+<DocumentFragment>
+  <div
+    class="formAuth"
+  >
+    <a
+      class="logo"
+      href="/"
+      role="button"
+      tabindex="0"
+    >
+      <test-file-stub />
+    </a>
+    <div
+      class="formBasic"
+    >
+      <div
+        class="content formSignup"
+      >
+        <div
+          class="title"
+        >
+          forget
+        </div>
+        <div
+          class="inputField bigMargin"
+        >
+          <div
+            class="top"
+          >
+            <span
+              class="title"
+            >
+              mail
+            </span>
+            <span
+              class="mustFill"
+            >
+              mustFill
+            </span>
+          </div>
+          <input
+            class="input"
+            placeholder="forgetMailPlaceholder"
+            type="text"
+            value=""
+          />
+        </div>
+        <button
+          class="button singelBtn bigMargin disabled feather normal blue"
+          type="button"
+        >
+          <div
+            class="featherIcon disabled normal"
+            style="transform: rotate(180deg);"
+          >
+            <test-file-stub />
+          </div>
+          <div
+            class="main text"
+          >
+            <span>
+              send
+            </span>
+          </div>
+          <div
+            class="featherIcon disabled normal"
+            style="transform: rotate(0deg);"
+          >
+            <test-file-stub />
+          </div>
+        </button>
+      </div>
+      <div
+        class="footer"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`with type login 1`] = `
+<DocumentFragment>
+  <div
+    class="formAuth"
+  >
+    <a
+      class="logo"
+      href="/"
+      role="button"
+      tabindex="0"
+    >
+      <test-file-stub />
+    </a>
+    <div
+      class="formBasic"
+    >
+      <div
+        class="content formSignup"
+      >
+        <div
+          class="title"
+        >
+          login
+        </div>
+        <div
+          class="buttons"
+        >
+          <button
+            class="button buttonGoogle socialButton"
+            type="button"
+          >
+            <test-file-stub />
+            <div
+              class="main"
+            >
+              <span>
+                Google login
+              </span>
+            </div>
+          </button>
+          <button
+            class="button buttonFacebook socialButton"
+            type="button"
+          >
+            <test-file-stub />
+            <div
+              class="main"
+            >
+              <span>
+                Facebook login
+              </span>
+            </div>
+          </button>
+        </div>
+        <div
+          class="division"
+        >
+          <div
+            class="division"
+          />
+          <span>
+            or
+          </span>
+          <div
+            class="division"
+          />
+        </div>
+        <div
+          class="inputField bigMargin"
+        >
+          <div
+            class="top"
+          >
+            <span
+              class="title"
+            >
+              account
+            </span>
+            <span
+              class="mustFill"
+            >
+              mustFill
+            </span>
+          </div>
+          <input
+            class="input"
+            placeholder="loginAccountPlaceholder"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="inputField smallMargin"
+        >
+          <div
+            class="top"
+          >
+            <span
+              class="title"
+            >
+              password
+            </span>
+            <span
+              class="mustFill"
+            >
+              mustFill
+            </span>
+          </div>
+          <input
+            class="input"
+            placeholder="loginPasswordPlaceholder"
+            type="password"
+            value=""
+          />
+        </div>
+        <button
+          class="button singelBtn bigMargin disabled feather normal blue"
+          type="button"
+        >
+          <div
+            class="featherIcon disabled normal"
+            style="transform: rotate(180deg);"
+          >
+            <test-file-stub />
+          </div>
+          <div
+            class="main text"
+          >
+            <span>
+              login
+            </span>
+          </div>
+          <div
+            class="featherIcon disabled normal"
+            style="transform: rotate(0deg);"
+          >
+            <test-file-stub />
+          </div>
+        </button>
+      </div>
+      <div
+        class="footer formLoginFooter"
+      >
+        <div
+          class="item"
+        >
+          <button
+            type="button"
+          >
+            forget?
+          </button>
+        </div>
+        <div
+          class="loginFootMargin item"
+        >
+          noAccount 
+          <button
+            type="button"
+          >
+            signup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`with type reset password 1`] = `
+<DocumentFragment>
+  <div
+    class="formAuth"
+  >
+    <a
+      class="logo"
+      href="/"
+      role="button"
+      tabindex="0"
+    >
+      <test-file-stub />
+    </a>
+    <div
+      class="formBasic"
+    >
+      <div
+        class="content formSignup"
+      >
+        <div
+          class="title"
+        >
+          reset
+        </div>
+        <div
+          class="inputField bigMargin"
+        >
+          <div
+            class="top"
+          >
+            <span
+              class="title"
+            >
+              resetPassword
+            </span>
+            <span
+              class="mustFill"
+            >
+              mustFill
+            </span>
+          </div>
+          <input
+            class="input"
+            placeholder="passwordPlaceholder"
+            type="password"
+            value=""
+          />
+        </div>
+        <div
+          class="inputField smallMargin"
+        >
+          <div
+            class="top"
+          >
+            <span
+              class="title"
+            >
+              confirmPassword
+            </span>
+            <span
+              class="mustFill"
+            >
+              mustFill
+            </span>
+          </div>
+          <input
+            class="input"
+            placeholder="confirmPasswordPlaceholder"
+            type="password"
+            value=""
+          />
+        </div>
+        <button
+          class="button singelBtn bigMargin disabled feather normal blue"
+          type="button"
+        >
+          <div
+            class="featherIcon disabled normal"
+            style="transform: rotate(180deg);"
+          >
+            <test-file-stub />
+          </div>
+          <div
+            class="main text"
+          >
+            <span>
+              confirm
+            </span>
+          </div>
+          <div
+            class="featherIcon disabled normal"
+            style="transform: rotate(0deg);"
+          >
+            <test-file-stub />
+          </div>
+        </button>
+      </div>
+      <div
+        class="footer"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`with type signup 1`] = `
+<DocumentFragment>
+  <div
+    class="formAuth"
+  >
+    <a
+      class="logo"
+      href="/"
+      role="button"
+      tabindex="0"
+    >
+      <test-file-stub />
+    </a>
+    <div
+      class="formBasic"
+    >
+      <div
+        class="content formSignup"
+      >
+        <div
+          class="title"
+        >
+          signup
+        </div>
+        <div
+          class="buttons"
+        >
+          <button
+            class="button buttonGoogle socialButton"
+            type="button"
+          >
+            <test-file-stub />
+            <div
+              class="main"
+            >
+              <span>
+                Google signup
+              </span>
+            </div>
+          </button>
+          <button
+            class="button buttonFacebook socialButton"
+            type="button"
+          >
+            <test-file-stub />
+            <div
+              class="main"
+            >
+              <span>
+                Facebook signup
+              </span>
+            </div>
+          </button>
+        </div>
+        <div
+          class="division"
+        >
+          <div
+            class="division"
+          />
+          <span>
+            or
+          </span>
+          <div
+            class="division"
+          />
+        </div>
+        <div
+          class="inputField bigMargin"
+        >
+          <div
+            class="top"
+          >
+            <span
+              class="title"
+            >
+              account
+            </span>
+            <span
+              class="mustFill"
+            >
+              mustFill
+            </span>
+          </div>
+          <input
+            class="input"
+            placeholder="accountPlaceholder"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="passwordBox"
+        >
+          <div
+            class="inputField"
+          >
+            <div
+              class="top"
+            >
+              <span
+                class="title"
+              >
+                password
+              </span>
+              <span
+                class="mustFill"
+              >
+                mustFill
+              </span>
+            </div>
+            <input
+              class="input"
+              placeholder="passwordPlaceholder"
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            class="inputField"
+          >
+            <div
+              class="top"
+            >
+              <span
+                class="title"
+              >
+                confirmPassword
+              </span>
+              <span
+                class="mustFill"
+              >
+                mustFill
+              </span>
+            </div>
+            <input
+              class="input"
+              placeholder="confirmPasswordPlaceholder"
+              type="password"
+              value=""
+            />
+          </div>
+        </div>
+        <button
+          class="button singelBtn bigMargin disabled feather normal blue"
+          type="button"
+        >
+          <div
+            class="featherIcon disabled normal"
+            style="transform: rotate(180deg);"
+          >
+            <test-file-stub />
+          </div>
+          <div
+            class="main text"
+          >
+            <span>
+              signup
+            </span>
+          </div>
+          <div
+            class="featherIcon disabled normal"
+            style="transform: rotate(0deg);"
+          >
+            <test-file-stub />
+          </div>
+        </button>
+      </div>
+      <div
+        class="footer formSignupFooter"
+      >
+        <div
+          class="item"
+        >
+          hasAccount 
+          <button
+            type="button"
+          >
+            login
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`with type verify 1`] = `
+<DocumentFragment>
+  <div
+    class="formAuth"
+  >
+    <a
+      class="logo"
+      href="/"
+      role="button"
+      tabindex="0"
+    >
+      <test-file-stub />
+    </a>
+  </div>
+</DocumentFragment>
+`;

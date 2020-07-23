@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`__interactive 1`] = `
+<DocumentFragment>
+  <ul>
+    <li
+      data-testid="1"
+    >
+      Lee
+    </li>
+    <li
+      data-testid="2"
+    >
+      Mike
+    </li>
+  </ul>
+</DocumentFragment>
+`;

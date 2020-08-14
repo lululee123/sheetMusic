@@ -1,3 +1,50 @@
 /*
  * This is for global css usage.
- */
+*/
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	font-family: 'Noto Sans TC', 'PingFangTC-Light', 'Microsoft JhengHei', sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	outline: none;
+}
+
+body,
+input,
+select,
+textarea,
+button {
+	-webkit-font-smoothing: antialiased;
+	font-family: 'Noto Sans TC', 'PingFangTC-Light', 'Microsoft JhengHei', sans-serif;
+}
+
+body {
+	margin: 0;
+	overflow-x: hidden;
+	width: 100%;
+
+	&:global(.no-scroll) {
+		position: fixed;
+		overflow-y: scroll;
+	}
+}
+
+a {
+	text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0;
+	padding: 0;
+}

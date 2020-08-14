@@ -1,14 +1,6 @@
 import React, { useLayoutEffect, useRef, MouseEvent } from 'react';
 import ReactDOM from 'react-dom';
-import {
-	useTransition,
-	animated,
-	config,
-	SpringConfig,
-	AnimationResult,
-	TransitionState,
-	UnknownProps,
-} from 'react-spring';
+import { useTransition, animated, config } from 'react-spring';
 import classnames from 'classnames';
 
 import styles from './index.css';
@@ -16,25 +8,20 @@ import styles from './index.css';
 interface ModalComponentProperty {
 	className?: string;
 	active: boolean;
-	config?: SpringConfig;
 	onDeactivate?: () => void;
-	onRest?: (result: AnimationResult<UnknownProps>, transition: TransitionState) => void;
 }
 
 const ModalComponent: React.FC<ModalComponentProperty> = ({
 	className,
 	children,
 	active = false,
-	config: propsConfig = config.stiff,
 	onDeactivate = () => {},
-	onRest = () => {},
 }) => {
-	const transition = useTransition(active, {
+	const transitions = useTransition(active, null, {
 		from: { opacity: 0, transform: 'translateY(10px)' },
 		enter: { opacity: 1, transform: 'translateY(0px)' },
 		leave: { opacity: 0, transform: 'translateY(10px)' },
-		onRest,
-		config: propsConfig,
+		config: config.stiff,
 	});
 
 	const handleClick = (e: MouseEvent) => {
@@ -45,38 +32,32 @@ const ModalComponent: React.FC<ModalComponentProperty> = ({
 
 	return (
 		<>
-			{transition(
-				(values, item) =>
-					item && (
-						<animated.div
-							className={classnames(styles.modal, className)}
-							style={values}
-							onClick={handleClick}
-						>
-							{children}
-						</animated.div>
-					),
-			)}
+			{
+				transitions.map(
+					({ item, props, key }) =>
+						item && (
+							<animated.div
+								key={key}
+								className={classnames(styles.modal, className)}
+								style={props}
+								onClick={handleClick}
+							>
+								{children}
+							</animated.div>
+						),
+				)
+			}
 		</>
-	);
+	)
 };
 
 interface ModalProperty {
 	className?: string;
 	active: boolean;
-	config?: SpringConfig;
 	onDeactivate?: () => void;
-	onRest?: (result: AnimationResult<UnknownProps>, transition: TransitionState) => void;
 }
 
-const Modal: React.FC<ModalProperty> = ({
-	className,
-	active,
-	config: propsConfig,
-	onDeactivate,
-	onRest,
-	children,
-}) => {
+const Modal: React.FC<ModalProperty> = ({ className, active, onDeactivate, children }) => {
 	const refDiv = useRef(document.createElement('div'));
 
 	useLayoutEffect(() => {
@@ -98,13 +79,7 @@ const Modal: React.FC<ModalProperty> = ({
 	}, []);
 
 	return ReactDOM.createPortal(
-		<ModalComponent
-			className={className}
-			active={active}
-			config={propsConfig}
-			onDeactivate={onDeactivate}
-			onRest={onRest}
-		>
+		<ModalComponent className={className} active={active} onDeactivate={onDeactivate}>
 			{children}
 		</ModalComponent>,
 		refDiv.current,

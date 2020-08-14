@@ -1,3 +1,5 @@
+import firebase from 'firebase';
+
 interface FireaseConfig {
 	[key: string]: string;
 }
@@ -11,6 +13,10 @@ const config: FireaseConfig = {
 	messagingSenderId: '1028478055327',
 	appId: '1:1028478055327:web:546203a2084ed952d203aa',
 	measurementId: 'G-48NXYD6YNX',
+};
+
+export const initFirebase = () => {
+	firebase.initializeApp(config).database();
 };
 
 export default config;

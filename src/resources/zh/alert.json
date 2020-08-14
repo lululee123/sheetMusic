@@ -1,0 +1,10 @@
+{
+	"confirm": "確認",
+	"email-already-in-use": "帳號已存在",
+	"user-disabled": "帳號已失效或不存在",
+	"invalid-email": "帳號錯誤",
+	"weak-password": "密碼錯誤",
+	"resetMailSend": "重設密碼信已寄出",
+	"resetMailSendFail": "重設密碼信寄送失敗",
+	"fail": "失敗"
+}

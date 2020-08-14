@@ -1,5 +1,15 @@
 export default {
 	'--standard': '#999',
 	'--secondary': '#DDD',
-	'--darkBlack': '#404040',
+	'--darkBlack': '#323432',
+	'--lightBlack': '#636864',
+	'--darkGray': '#969c97',
+	'--gray': '#cbcdcb',
+	'--mediumGray': '#eee',
+	'--lightGray': '#fafafa',
+	'--darkBlue': '#008794',
+	'--blue': '#009fae',
+	'--linkBlue': '#478ae9',
+	'--lightBlue': '#88cfd7',
+	'--red': '#e84752',
 };

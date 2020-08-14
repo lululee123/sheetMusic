@@ -1,0 +1,15 @@
+.modal {
+	z-index: 300;
+	background-color: transparent;
+
+	& .modal-alert {
+		display: flex;
+		justify-content: center;
+		align-self: flex-start;
+		border-radius: 2px;
+		box-shadow: 0 0 12px 0 rgba(50, 52, 50, 0.25);
+		background-color: white;
+		box-sizing: border-box;
+		margin: 10vh 0 12px;
+	}
+}

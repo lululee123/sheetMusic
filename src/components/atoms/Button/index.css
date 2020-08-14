@@ -35,75 +35,9 @@
 		}
 	}
 
-	& > .feather-icon {
-		display: inline-flex;
-		flex-shrink: 0;
-		height: 100%;
-
-		&.large > svg {
-			height: 48px;
-		}
-
-		&.normal > svg {
-			height: 40px;
-		}
-
-		&.small > svg {
-			height: 32px;
-		}
-
-		& > svg {
-			width: auto;
-			margin-left: -1px;
-
-			& > g {
-				fill: var(--blue);
-				transition: fill 0.3s ease;
-
-				& path {
-					stroke: var(--blue);
-					transition: stroke 0.3s ease;
-				}
-			}
-		}
-
-		&.outline {
-			& > svg g {
-				fill: transparent;
-
-				& path {
-					stroke: var(--blue);
-				}
-			}
-		}
-	}
-
-	&.large {
-		& > .main {
-			height: 48px;
-		}
-	}
-
 	&.normal {
 		& > .main {
 			height: 40px;
-		}
-	}
-
-	&.small {
-		& > .main {
-			height: 32px;
-
-			& > span {
-				font-size: 14px;
-			}
-		}
-	}
-
-	&.feather {
-		& > .main {
-			padding: 10.5px 0;
-			border-radius: 0;
 		}
 	}
 
@@ -134,24 +68,6 @@
 			color: var(--blue);
 		}
 
-		& > .feather-icon {
-			& > svg g {
-				fill: white;
-
-				& path {
-					stroke: white;
-				}
-			}
-
-			&.outline {
-				& > svg g {
-					& path {
-						stroke: white;
-					}
-				}
-			}
-		}
-
 		&.link {
 			& > .main {
 				border: none;
@@ -177,24 +93,6 @@
 				color: var(--lightBlue);
 			}
 		}
-
-		& > .feather-icon {
-			& > svg g {
-				fill: var(--lightBlue);
-
-				& path {
-					stroke: var(--lightBlue);
-				}
-			}
-
-			&.outline {
-				& > svg g {
-					& path {
-						stroke: var(--lightBlue);
-					}
-				}
-			}
-		}
 	}
 
 	&:hover {
@@ -202,28 +100,6 @@
 			border-top: 1px solid var(--darkBlue);
 			border-bottom: 1px solid var(--darkBlue);
 			background-color: var(--darkBlue);
-		}
-
-		& > .feather-icon {
-			& > svg {
-				& > g {
-					fill: var(--darkBlue);
-
-					& path {
-						stroke: var(--darkBlue);
-					}
-				}
-			}
-
-			&.outline {
-				& > svg g {
-					fill: transparent;
-
-					& path {
-						stroke: var(--darkBlue);
-					}
-				}
-			}
 		}
 
 		&.outline {
@@ -286,24 +162,6 @@
 			&.link {
 				& > .main {
 					color: var(--lightBlue);
-				}
-			}
-
-			& > .feather-icon {
-				& > svg g {
-					fill: var(--lightBlue);
-
-					& path {
-						stroke: var(--lightBlue);
-					}
-				}
-
-				&.outline {
-					& > svg g {
-						& path {
-							stroke: var(--lightBlue);
-						}
-					}
 				}
 			}
 		}

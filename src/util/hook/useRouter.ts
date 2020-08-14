@@ -15,6 +15,7 @@ interface CustomRouteContext extends RouteContext {
 
 export interface CustomRoute extends Route {
 	onEnter?: (R: CustomRouteContext) => Promise<ReactElement | boolean | void | undefined>;
+	onLeave?: (R: CustomRouteContext) => Promise<ReactElement | boolean | void | undefined>;
 	components: () => Promise<{ default: ComponentType }>[];
 	render: (C: FC[], R: ReactElement) => ReactElement;
 	children?: CustomRoute[];
@@ -30,6 +31,10 @@ const options: RouterOptions = {
 
 		if (typeof route.onEnter === 'function') {
 			children = await route.onEnter(ctx as CustomRouteContext);
+		}
+
+		if (typeof route.onLeave === 'function') {
+			children = await route.onLeave(ctx as CustomRouteContext);
 		}
 
 		// Do not Enter children

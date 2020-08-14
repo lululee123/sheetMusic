@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactElement } from 'react';
+import React, { useState, ReactElement } from 'react';
 import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 
@@ -10,6 +10,9 @@ import Division from 'components/atoms/Division';
 import InputField from 'components/atoms/InputField';
 import Button from 'components/atoms/Button';
 import Link from 'components/atoms/Link';
+
+import { State, UpdateFormActionState } from 'models/auth';
+import { ModalAuthComponentProperty } from 'components/organisms/ModalAuth';
 
 import styles from './index.css';
 
@@ -35,15 +38,22 @@ const FormBasic: React.FC<FormBasicProperty> = ({
 );
 
 interface FormProperty {
-
+	updateForm: (props: UpdateFormActionState) => void;
+	auth: State;
 }
 
 interface FormLoginProperty extends FormProperty {
-
+	login: () => void;
+	loginWithGoogle: () => void;
+	loginWithFaceBook: () => void;
 }
 
 const FormLogin: React.FC<FormLoginProperty> = ({
-	
+	auth,
+	updateForm,
+	login,
+	loginWithGoogle,
+	loginWithFaceBook,
 }) => {
 	const { t } = useTranslation(['auth']);
 	const [emailError, setEmailError] = useState(false);
@@ -51,7 +61,7 @@ const FormLogin: React.FC<FormLoginProperty> = ({
 		if (!emailValid(auth.loginForm.email)) {
 			setEmailError(true);
 		} else {
-			Login();
+			login();
 		}
 	};
 
@@ -65,12 +75,12 @@ const FormLogin: React.FC<FormLoginProperty> = ({
 						<ButtonGoogle
 							className={styles.socialButton}
 							text={`Google ${t('login')}`}
-							onClick={loginGoogle}
+							onClick={loginWithGoogle}
 						/>
 						<ButtonFacebook
 							className={styles.socialButton}
 							text={`Facebook ${t('login')}`}
-							onClick={loginFacebook}
+							onClick={loginWithFaceBook}
 						/>
 					</div>
 					<div className={styles.division}>
@@ -106,7 +116,6 @@ const FormLogin: React.FC<FormLoginProperty> = ({
 					<Button
 						className={classnames(styles.singelBtn, styles.bigMargin)}
 						textClassName={styles.text}
-						feather
 						onClick={checkLogin}
 						disabled={!(auth.loginForm.email && auth.loginForm.password)}
 					>
@@ -118,27 +127,11 @@ const FormLogin: React.FC<FormLoginProperty> = ({
 			renderFooter={() => (
 				<>
 					<div className={styles.item}>
-						<button
-							onClick={() => {
-								openModal({ category: 'auth', type: 'forget' });
-								closeModal({ category: 'alert' });
-							}}
-							type="button"
-						>
-							{`${t('forget')}?`}
-						</button>
+						<Link className={styles.button} to="/forget">{`${t('forget')}?`}</Link>
 					</div>
 					<div className={classnames(styles.loginFootMargin, styles.item)}>
 						{`${t('noAccount')} `}
-						<button
-							onClick={() => {
-								openModal({ category: 'auth', type: 'signup' });
-								closeModal({ category: 'alert' });
-							}}
-							type="button"
-						>
-							{t('signup')}
-						</button>
+						<Link className={styles.button} to="/signup">{`${t('signup')}?`}</Link>
 					</div>
 				</>
 			)}
@@ -147,21 +140,17 @@ const FormLogin: React.FC<FormLoginProperty> = ({
 };
 
 interface FormSignupProperty extends FormProperty {
-	Signup: () => void;
-	openModal: (p: OpenModalActionState) => void;
-	closeModal: (p: CloseModalActionState) => void;
-	loginGoogle: () => void;
-	loginFacebook: () => void;
+	signup: () => void;
+	loginWithGoogle: () => void;
+	loginWithFaceBook: () => void;
 }
 
 const FormSignup: React.FC<FormSignupProperty> = ({
 	updateForm,
 	auth,
-	Signup,
-	openModal,
-	closeModal,
-	loginGoogle,
-	loginFacebook,
+	signup,
+	loginWithGoogle,
+	loginWithFaceBook,
 }) => {
 	const { t } = useTranslation(['auth']);
 	const [emailError, setEmailError] = useState(false);
@@ -175,7 +164,7 @@ const FormSignup: React.FC<FormSignupProperty> = ({
 		} else if (auth.signupForm.password !== auth.signupForm.repeatPassword) {
 			setPasswordError({ status: true, text: `${t('notSame')}` });
 		} else {
-			Signup();
+			signup();
 		}
 	};
 
@@ -189,12 +178,12 @@ const FormSignup: React.FC<FormSignupProperty> = ({
 						<ButtonGoogle
 							className={styles.socialButton}
 							text={`Google ${t('signup')}`}
-							onClick={loginGoogle}
+							onClick={loginWithGoogle}
 						/>
 						<ButtonFacebook
 							className={styles.socialButton}
 							text={`Facebook ${t('signup')}`}
-							onClick={loginFacebook}
+							onClick={loginWithFaceBook}
 						/>
 					</div>
 					<div className={styles.division}>
@@ -245,7 +234,6 @@ const FormSignup: React.FC<FormSignupProperty> = ({
 					<Button
 						className={classnames(styles.singelBtn, styles.bigMargin)}
 						textClassName={styles.text}
-						feather
 						onClick={checkSignup}
 						disabled={
 							!(auth.signupForm.email && auth.signupForm.password && auth.signupForm.repeatPassword)
@@ -259,120 +247,28 @@ const FormSignup: React.FC<FormSignupProperty> = ({
 			renderFooter={() => (
 				<div className={styles.item}>
 					{`${t('hasAccount')} `}
-					<button
-						onClick={() => {
-							openModal({ category: 'auth', type: 'login' });
-							closeModal({ category: 'alert' });
-						}}
-						type="button"
-					>
-						{t('login')}
-					</button>
+					<Link className={styles.button} to="/login">{`${t('login')}?`}</Link>
 				</div>
 			)}
 		/>
 	);
 };
 
-interface FormResetPasswordProperty extends FormProperty {
-	Reset: () => void;
-}
-
-const FormResetPassword: React.FC<FormResetPasswordProperty> = ({ updateForm, auth, Reset }) => {
-	const { t } = useTranslation(['auth']);
-	const [passwordError, setPasswordError] = useState({ status: false, text: '' });
-	const checkReset = () => {
-		if (!passwordValid(auth.resetForm.newPassword)) {
-			setPasswordError({ status: true, text: `${t('passwordFormatError')}` });
-		} else if (auth.resetForm.newPassword !== auth.resetForm.repeatPassword) {
-			setPasswordError({ status: true, text: `${t('notSame')}` });
-		} else {
-			Reset();
-		}
-	};
-
-	return (
-		<FormBasic
-			contentClassName={styles.formSignup}
-			renderContent={() => (
-				<>
-					<div className={styles.title}>{t('reset')}</div>
-					<InputField
-						className={styles.bigMargin}
-						title={t('resetPassword')}
-						placeholder={t('passwordPlaceholder')}
-						type="password"
-						value={auth.resetForm.newPassword}
-						onChange={e => {
-							updateForm({ type: 'resetForm', key: 'newPassword', value: e.target.value });
-							setPasswordError({ status: false, text: '' });
-						}}
-						error={passwordError.status}
-						errorText={passwordError.text}
-						mustFill
-					/>
-					<InputField
-						className={styles.smallMargin}
-						title={t('confirmPassword')}
-						placeholder={t('confirmPasswordPlaceholder')}
-						type="password"
-						value={auth.resetForm.repeatPassword}
-						onChange={e => {
-							updateForm({ type: 'resetForm', key: 'repeatPassword', value: e.target.value });
-							setPasswordError({ status: false, text: '' });
-						}}
-						mustFill
-					/>
-					<Button
-						className={classnames(styles.singelBtn, styles.bigMargin)}
-						textClassName={styles.text}
-						feather
-						onClick={checkReset}
-						disabled={!(auth.resetForm.newPassword && auth.resetForm.repeatPassword)}
-					>
-						{t('confirm')}
-					</Button>
-				</>
-			)}
-		/>
-	);
-};
-
 interface FormForgetProperty extends FormProperty {
-	Forget: () => any; // eslint-disable-line @typescript-eslint/no-explicit-any
+	forget: () => any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
-const FormForget: React.FC<FormForgetProperty> = ({ auth, updateForm, Forget }) => {
+const FormForget: React.FC<FormForgetProperty> = ({ auth, updateForm, forget }) => {
 	const { t } = useTranslation(['auth']);
 	const [emailError, setEmailError] = useState(false);
-	const [btnDisable, setBtnDisable] = useState(false);
 
-	const checkForget = async () => {
-		if (!emailValid(auth.forgotForm.email)) {
+	const checkForget = () => {
+		if (!emailValid(auth.forgetForm.email)) {
 			setEmailError(true);
 		} else {
-			const {
-				value: { success },
-			} = await Forget();
-
-			// if forget email send successfully, set button disable
-			if (success) {
-				setBtnDisable(true);
-			}
+			forget();
 		}
 	};
-
-	useEffect(() => {
-		let timeout: number;
-
-		if (btnDisable) {
-			timeout = window.setTimeout(() => {
-				setBtnDisable(false);
-			}, 180000);
-		}
-
-		return () => window.clearTimeout(timeout);
-	}, [btnDisable]);
 
 	return (
 		<FormBasic
@@ -385,9 +281,9 @@ const FormForget: React.FC<FormForgetProperty> = ({ auth, updateForm, Forget }) 
 						title={t('mail')}
 						placeholder={t('forgetMailPlaceholder')}
 						type="text"
-						value={auth.forgotForm.email}
+						value={auth.forgetForm.email}
 						onChange={e => {
-							updateForm({ type: 'forgotForm', key: 'email', value: e.target.value });
+							updateForm({ type: 'forgetForm', key: 'email', value: e.target.value });
 							setEmailError(false);
 						}}
 						error={emailError}
@@ -397,9 +293,8 @@ const FormForget: React.FC<FormForgetProperty> = ({ auth, updateForm, Forget }) 
 					<Button
 						className={classnames(styles.singelBtn, styles.bigMargin)}
 						textClassName={styles.text}
-						feather
 						onClick={checkForget}
-						disabled={!auth.forgotForm.email ? true : !!btnDisable}
+						disabled={!auth.forgetForm.email}
 					>
 						{t('send')}
 					</Button>
@@ -409,32 +304,42 @@ const FormForget: React.FC<FormForgetProperty> = ({ auth, updateForm, Forget }) 
 	);
 };
 
-interface FormAuthProperty {
+interface FormAuthProperty extends ModalAuthComponentProperty {
 	className?: string;
-	type: string;
 }
 
 const FormAuth: React.FC<FormAuthProperty> = ({
 	className,
 	type: PropsType,
+	updateForm,
+	login,
+	signup,
+	forget,
+	loginWithGoogle,
+	loginWithFaceBook,
+	auth,
 }) => {
 	return (
 		<div className={classnames(styles.formAuth, className)}>
 			{PropsType === 'login' && (
-				<FormLogin />
+				<FormLogin
+					auth={auth}
+					updateForm={updateForm}
+					login={login}
+					loginWithGoogle={loginWithGoogle}
+					loginWithFaceBook={loginWithFaceBook}
+				/>
 			)}
-			{/* {PropsType === 'signup' && (
+			{PropsType === 'signup' && (
 				<FormSignup
 					updateForm={updateForm}
 					auth={auth}
-					Signup={Signup}
-					openModal={openModal}
-					closeModal={closeModal}
-					loginFacebook={loginFacebook}
-					loginGoogle={loginGoogle}
+					signup={signup}
+					loginWithGoogle={loginWithGoogle}
+					loginWithFaceBook={loginWithFaceBook}
 				/>
 			)}
-			{PropsType === 'forget' && <FormForget updateForm={updateForm} auth={auth} Forget={Forget} />} */}
+			{PropsType === 'forget' && <FormForget updateForm={updateForm} auth={auth} forget={forget} />}
 		</div>
 	);
 };

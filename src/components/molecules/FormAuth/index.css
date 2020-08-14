@@ -112,7 +112,7 @@
 		text-align: center;
 	}
 
-	& button {
+	& .button {
 		color: var('--linkBlue');
 		text-decoration: none;
 		outline: none;
@@ -134,7 +134,7 @@
 		text-align: center;
 	}
 
-	& button {
+	& .button {
 		color: var('--linkBlue');
 		text-decoration: none;
 		outline: none;

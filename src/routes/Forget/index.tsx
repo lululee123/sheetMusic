@@ -1,13 +1,9 @@
 import React from 'react';
 import { CustomRoute } from 'util/hook/useRouter';
-import { closeModal } from 'models/modal';
 
 const routes: CustomRoute = {
-	path: '/login',
+	path: '/forget',
 	components: () => [import(/* webpackChunkName: 'login' */ './component')],
-	render: ([Login]) => <Login />,
-	onLeave: async ({ store }) => {
-		await store.dispatch(closeModal({ category: 'alert' }));
-	},
+	render: ([Forget]) => <Forget />,
 };
 export default routes;

@@ -1,14 +1,14 @@
-import { loadAuthToken } from 'models/firebase';
+import { saveTokenAndGetUserData } from 'models/auth';
 import { Store } from 'redux';
 
 import storage from './storage';
 
-export const loadConfigFromLocalStorage = (store: Store) => {
+export const loadTokenFromLocalStorageAndGetUserData = (store: Store) => {
 	const tokenData = storage.getItem('token');
 
 	const token = tokenData === null ? '' : JSON.parse(tokenData);
 
-	store.dispatch(loadAuthToken(token));
+	store.dispatch(saveTokenAndGetUserData(token));
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,7 +17,6 @@ export const isExist = (value: any) =>
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isEmpty = (value: any) => !isExist(value);
-
 
 export function emailValid(email: string) {
 	// eslint-disable-next-line no-useless-escape

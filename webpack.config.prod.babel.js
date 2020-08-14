@@ -9,6 +9,7 @@ import TerserPlugin from 'terser-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 
 import palette from './config/palette';
 import media from './config/media';
@@ -103,6 +104,15 @@ const webpackProdConfig = {
 		}),
 
 		new webpack.HashedModuleIdsPlugin(),
+
+		new CopyPlugin({
+			patterns: [
+				{
+					from: `./src/resources`,
+					to: './static/resources/',
+				},
+			],
+		}),
 	],
 	optimization: {
 		minimizer: [

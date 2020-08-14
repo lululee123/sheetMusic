@@ -6,10 +6,10 @@ import ModalAuth from 'components/organisms/ModalAuth';
 
 import styles from './index.css';
 
-const LoginPage: React.FC = () => (
-	<div className={classnames(styles.loginPage)}>
-		<ModalAuth type="login" />
+const SignupPage: React.FC = () => (
+	<div className={classnames(styles.signupPage)}>
+		<ModalAuth type="signup" />
 	</div>
 );
 
-export default hot(LoginPage);
+export default hot(SignupPage);

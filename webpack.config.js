@@ -6,6 +6,7 @@ import atImport from 'postcss-import';
 import postcssPresetEnv from 'postcss-preset-env';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 
 import palette from './config/palette';
 import media from './config/media';
@@ -31,6 +32,14 @@ export default {
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
 			chunksSortMode: 'dependency',
+		}),
+		new CopyPlugin({
+			patterns: [
+				{
+					from: `./src/resources`,
+					to: './static/resources/',
+				},
+			],
 		}),
 	],
 	optimization: {

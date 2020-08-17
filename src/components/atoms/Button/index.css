@@ -18,9 +18,9 @@
 		flex-shrink: 0;
 		padding: 0 22.5px;
 		border-radius: 2px;
-		border-top: 1px solid var(--blue);
-		border-bottom: 1px solid var(--blue);
-		background-color: var(--blue);
+		border-top: 1px solid var(--main);
+		border-bottom: 1px solid var(--main);
+		background-color: var(--main);
 		color: white;
 		transition: all 0.3s ease;
 
@@ -45,7 +45,7 @@
 		& > .main {
 			border-radius: 0;
 			background-color: transparent;
-			color: var(--blue);
+			color: var(--main);
 		}
 	}
 
@@ -56,7 +56,7 @@
 			padding: 0;
 			height: auto;
 			background-color: transparent;
-			color: var(--blue);
+			color: var(--main);
 		}
 	}
 
@@ -65,7 +65,7 @@
 			border-top: 1px solid white;
 			border-bottom: 1px solid white;
 			background-color: white;
-			color: var(--blue);
+			color: var(--main);
 		}
 
 		&.link {
@@ -81,37 +81,37 @@
 		cursor: not-allowed;
 
 		& > .main {
-			border-top: 1px solid var(--lightBlue);
-			border-bottom: 1px solid var(--lightBlue);
-			background-color: var(--lightBlue);
+			border-top: 1px solid var(--lightMain);
+			border-bottom: 1px solid var(--lightMain);
+			background-color: var(--lightMain);
 		}
 
 		&.link {
 			& > .main {
 				border: none;
 				background-color: transparent;
-				color: var(--lightBlue);
+				color: var(--lightMain);
 			}
 		}
 	}
 
 	&:hover {
 		& > .main {
-			border-top: 1px solid var(--darkBlue);
-			border-bottom: 1px solid var(--darkBlue);
-			background-color: var(--darkBlue);
+			border-top: 1px solid var(--darkMain);
+			border-bottom: 1px solid var(--darkMain);
+			background-color: var(--darkMain);
 		}
 
 		&.outline {
 			& > .main {
-				color: var(--darkBlue);
+				color: var(--darkMain);
 				background-color: transparent;
 			}
 		}
 
 		&.link {
 			& > .main {
-				color: var(--darkBlue);
+				color: var(--darkMain);
 				background-color: transparent;
 				border: none;
 			}
@@ -122,7 +122,7 @@
 				border-top: 1px solid white;
 				border-bottom: 1px solid white;
 				background-color: white;
-				color: var(--blue);
+				color: var(--main);
 			}
 
 			& > .feather-icon {
@@ -154,14 +154,14 @@
 
 		&.disabled {
 			& > .main {
-				border-top: 1px solid var(--lightBlue);
-				border-bottom: 1px solid var(--lightBlue);
-				background-color: var(--lightBlue);
+				border-top: 1px solid var(--lightMain);
+				border-bottom: 1px solid var(--lightMain);
+				background-color: var(--lightMain);
 			}
 
 			&.link {
 				& > .main {
-					color: var(--lightBlue);
+					color: var(--lightMain);
 				}
 			}
 		}

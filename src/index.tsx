@@ -10,7 +10,6 @@ import 'normalize.css';
 // Global css setting
 import './global.css';
 
-import { loadTokenFromLocalStorageAndGetUserData } from 'util/helper';
 import { initi18next } from 'util/i18n';
 import { initFirebase } from 'util/firebase';
 
@@ -24,7 +23,6 @@ const store = configureStore({});
 const i18n = initi18next(store);
 
 initFirebase();
-loadTokenFromLocalStorageAndGetUserData(store);
 
 ReactDOM.render(
 	<I18nextProvider i18n={i18n}>

@@ -60,7 +60,7 @@
 		font-size: 14px;
 		font-weight: 500;
 		line-height: 1.71;
-		color: var('--blue');
+		color: var(--main);
 		border: none;
 		background-color: transparent;
 		height: auto;
@@ -70,6 +70,6 @@
 	& .text-disable {
 		border: none;
 		background-color: transparent;
-		color: var('--lightBlue');
+		color: var(--lightMain);
 	}
 }

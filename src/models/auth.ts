@@ -4,7 +4,6 @@ import { Dispatch } from 'redux';
 import firebase from 'firebase';
 
 import storage from 'util/storage';
-import { isExist } from 'util/helper';
 
 import { openModal } from './modal';
 
@@ -28,10 +27,13 @@ export const saveTokenAndGetUserData = createAction(
 	'SAVE_ACCESS_TOKEN',
 	(token: string) => async (dispatch: Dispatch) => {
 		storage.setItem('token', JSON.stringify(token));
-		const data = firebase.database().ref(`users/${token}`);
-		data.on('value', (e: { val: () => { [props: string]: string | number | boolean } }) => {
-			dispatch(e.val() === null ? getData({}) : getData(e.val()));
-		});
+		await firebase
+			.database()
+			.ref(`users/${token}`)
+			.once('value')
+			.then((e: { val: () => { [props: string]: string | number | boolean } }) => {
+				dispatch(e.val() === null ? getData({}) : getData(e.val()));
+			});
 
 		return { token };
 	},
@@ -179,7 +181,8 @@ export interface State {
 	};
 	token: string;
 	userInfo: {};
-	data: { list: [{ [props: string]: string | number | boolean }] };
+	data: { [key: string]: any };
+	loading: boolean;
 }
 
 export const initialState: State = {
@@ -200,6 +203,7 @@ export const initialState: State = {
 	token: '',
 	userInfo: {},
 	data: {},
+	loading: true,
 };
 
 export const reducer = {
@@ -222,6 +226,7 @@ export const reducer = {
 			GET_DATA: (state, action: Action<GetDataActionState>) => ({
 				...state,
 
+				loading: false,
 				data: action.payload.data,
 			}),
 
@@ -237,7 +242,6 @@ export const reducer = {
 
 const mapHooksToState = (state: GlobalState) => ({
 	auth: state.auth,
-	isLogin: isExist(state.auth.token),
 });
 
 const authActionsMap = {

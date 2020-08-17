@@ -8,6 +8,8 @@ import { useAuth } from 'models/auth';
 import { changeLng } from 'util/i18n';
 
 import Link from 'components/atoms/Link';
+import LoadingHOC from 'components/organisms/LoadingHOC';
+import SheetCard from 'components/molecules/SheetCard';
 
 import styles from './index.css';
 
@@ -15,41 +17,43 @@ const Home: React.FC = () => {
 	const { t } = useTranslation(['login', 'common']);
 	const [
 		{
-			auth: { data: sheetData },
+			auth: { data: sheetData, loading },
 		},
 	] = useAuth();
-	console.log(sheetData);
+
 	return (
-		<div className={styles.home}>
-			{Object.keys(sheetData).length === 0 ? (
-				<div>{t('common:noData')}</div>
-			) : (
-				<div>
-					{sheetData.list &&
-						sheetData.list.map(data => (
-							<div key={data.id}>
-								<img src={data.sheet} alt="icon" />
-							</div>
-						))}
-				</div>
-			)}
+		<LoadingHOC loading={loading}>
 			{/* <button
-				type="button"
-				onClick={() => {
-					changeLng('en');
-				}}
-			>
-				英文
-			</button>
-			<button
-				type="button"
-				onClick={() => {
-					changeLng('zh');
-				}}
-			>
-				中文
-			</button> */}
-		</div>
+					type="button"
+					onClick={() => {
+						changeLng('en');
+					}}
+				>
+					英文
+				</button>
+				<button
+					type="button"
+					onClick={() => {
+						changeLng('zh');
+					}}
+				>
+					中文
+				</button> */}
+			<div className={styles.home}>
+				{Object.keys(sheetData).length === 0 || sheetData.list.length === 0 ? (
+					<div>{t('common:noData')}</div>
+				) : (
+					<div>
+						{sheetData.list &&
+							sheetData.list.map((data: { id: number; sheet: string }) => (
+								<div key={data.id}>
+									<SheetCard to={`/sheet/${data.id}`} thumbnail={data.sheet} />
+								</div>
+							))}
+					</div>
+				)}
+			</div>
+		</LoadingHOC>
 	);
 };
 

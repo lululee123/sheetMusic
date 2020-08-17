@@ -1,14 +1,9 @@
-import { saveTokenAndGetUserData } from 'models/auth';
-import { Store } from 'redux';
-
 import storage from './storage';
 
-export const loadTokenFromLocalStorageAndGetUserData = (store: Store) => {
+export const loadTokenFromLocalStorage = () => {
 	const tokenData = storage.getItem('token');
 
-	const token = tokenData === null ? '' : JSON.parse(tokenData);
-
-	store.dispatch(saveTokenAndGetUserData(token));
+	return tokenData === null ? '' : JSON.parse(tokenData);
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

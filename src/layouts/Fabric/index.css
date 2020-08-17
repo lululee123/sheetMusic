@@ -1,0 +1,10 @@
+.fabric-canvas {
+	width: 650px;
+	height: 978px;
+	margin: 0 auto;
+
+	@media screen and (--mobile) {
+		width: 80vw;
+		height: 120.37vw;
+	}
+}

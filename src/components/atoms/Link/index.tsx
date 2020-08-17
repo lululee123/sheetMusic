@@ -15,7 +15,6 @@ interface LinkProperty {
 	className?: string;
 	to?: string;
 	onClick?: (e: MouseEvent<HTMLAnchorElement>) => void;
-	children: React.ReactChildren | string;
 }
 
 const Link: React.FC<LinkProperty> = ({ className, to, onClick = () => {}, children }) => {

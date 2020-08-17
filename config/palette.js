@@ -7,9 +7,9 @@ export default {
 	'--gray': '#cbcdcb',
 	'--mediumGray': '#eee',
 	'--lightGray': '#fafafa',
-	'--darkBlue': '#008794',
-	'--blue': '#009fae',
+	'--darkMain': '#008794',
+	'--main': '#009fae',
 	'--linkBlue': '#478ae9',
-	'--lightBlue': '#88cfd7',
+	'--lightMain': '#88cfd7',
 	'--red': '#e84752',
 };

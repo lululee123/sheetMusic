@@ -1,0 +1,13 @@
+.home-group {
+	& .header {
+		font-size: 19px;
+		line-height: 1.05;
+		letter-spacing: -0.3px;
+		color: var('--wording');
+		margin-bottom: 32px;
+	}
+
+	& .bottom-component {
+		margin-top: 50px;
+	}
+}

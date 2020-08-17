@@ -32,23 +32,21 @@ const ModalComponent: React.FC<ModalComponentProperty> = ({
 
 	return (
 		<>
-			{
-				transitions.map(
-					({ item, props, key }) =>
-						item && (
-							<animated.div
-								key={key}
-								className={classnames(styles.modal, className)}
-								style={props}
-								onClick={handleClick}
-							>
-								{children}
-							</animated.div>
-						),
-				)
-			}
+			{transitions.map(
+				({ item, props, key }) =>
+					item && (
+						<animated.div
+							key={key}
+							className={classnames(styles.modal, className)}
+							style={props}
+							onClick={handleClick}
+						>
+							{children}
+						</animated.div>
+					),
+			)}
 		</>
-	)
+	);
 };
 
 interface ModalProperty {

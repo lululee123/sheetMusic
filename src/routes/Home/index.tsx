@@ -10,6 +10,7 @@ import { changeLng } from 'util/i18n';
 import Link from 'components/atoms/Link';
 import LoadingHOC from 'components/organisms/LoadingHOC';
 import SheetCard from 'components/molecules/SheetCard';
+import SheetCardAdd from 'components/molecules/SheetCardAdd';
 
 import styles from './index.css';
 
@@ -47,11 +48,12 @@ const Home: React.FC = () => {
 						{sheetData.list &&
 							sheetData.list.map((data: { id: number; sheet: string }) => (
 								<div key={data.id}>
-									<SheetCard to={`/sheet/${data.id}`} thumbnail={data.sheet} />
+									<SheetCard to={`/sheet/data/${data.id}`} thumbnail={data.sheet} />
 								</div>
 							))}
 					</div>
 				)}
+				<SheetCardAdd />
 			</div>
 		</LoadingHOC>
 	);

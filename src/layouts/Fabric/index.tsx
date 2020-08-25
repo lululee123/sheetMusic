@@ -1,44 +1,70 @@
 import React, { useRef, useEffect } from 'react';
 import classnames from 'classnames';
-import { Scrollbars } from 'react-custom-scrollbars';
-
-import { useSheet } from 'models/sheet';
 
 import { useResize } from 'util/event';
+
+import { UseFabric, UpdateFabricCanvasParametersActionState, ImagesProperty } from 'models/sheet';
 
 import styles from './index.css';
 
 interface OriCanvasProperty {
 	className?: string;
+	initFabric: (arg0: UseFabric) => void;
+	renderCanvas: (arg0: any) => void;
+	image: ImagesProperty;
+	updateFabricCanvasParameters: (t1: UpdateFabricCanvasParametersActionState) => void;
 }
 
-const Fabric: React.FC<OriCanvasProperty> = ({ className }) => {
-	const [
-		{
-			sheet: { fabricCanvas },
-		},
-		{ initFabric },
-	] = useSheet();
-	const refCanvas = useRef(null);
-	const refContainer = useRef(null);
+const Fabric: React.FC<OriCanvasProperty> = ({
+	className,
+	initFabric,
+	renderCanvas,
+	image = { id: 0, url: '', canvas: '' },
+	updateFabricCanvasParameters,
+}) => {
+	const refCanvas = useRef<HTMLCanvasElement>(null);
+	const refContainer = useRef<HTMLDivElement>(null);
 	const { width: windowWidth } = useResize();
-	console.log(windowWidth);
 
 	useEffect(() => {
 		initFabric({
-			canvasRef: refCanvas, width: refContainer.current.clientWidth, height: refContainer.current.clientHeight
+			canvasRef: refCanvas,
+			width:
+				refContainer.current && refContainer.current.clientWidth
+					? refContainer.current.clientWidth
+					: 0,
+			height:
+				refContainer.current && refContainer.current.clientHeight
+					? refContainer.current.clientHeight
+					: 0,
 		});
-
-		return () => {
-			fabricCanvas.dispose();
-		};
 	}, []);
+
+	useEffect(() => {
+		// eslint-disable-next-line no-unused-expressions
+		image.id && renderCanvas(image);
+	}, [image]);
+
+	useEffect(() => {
+		updateFabricCanvasParameters({
+			key: 'containerWidth',
+			value:
+				refContainer.current && refContainer.current.clientWidth
+					? refContainer.current.clientWidth
+					: 0,
+		});
+		updateFabricCanvasParameters({
+			key: 'containerHeight',
+			value:
+				refContainer.current && refContainer.current.clientHeight
+					? refContainer.current.clientHeight
+					: 0,
+		});
+	}, [windowWidth]);
 
 	return (
 		<div className={classnames(styles.fabricCanvas, className)} ref={refContainer}>
-			<Scrollbars style={{ width: '100%', height: '100%' }}>
-				<canvas ref={refCanvas} />
-			</Scrollbars>
+			<canvas ref={refCanvas} />
 		</div>
 	);
 };

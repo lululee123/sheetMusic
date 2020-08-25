@@ -2,6 +2,7 @@ import React from 'react';
 import { CustomRoute } from 'util/hook/useRouter';
 
 import IdRoute from './SheetID';
+import AddRoute from './SheetAdd';
 
 const routes: CustomRoute = {
 	path: '/sheet',
@@ -17,6 +18,7 @@ const routes: CustomRoute = {
 			},
 		},
 		IdRoute,
+		AddRoute,
 	],
 };
 export default routes;

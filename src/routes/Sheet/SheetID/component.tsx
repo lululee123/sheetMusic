@@ -1,61 +1,68 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import classnames from 'classnames';
+import { fabric } from 'fabric';
+
+import { useSheet } from 'models/sheet';
 
 import HeightIcon from 'images/toolsIcon/01-height.inline.svg';
+import WidthIcon from 'images/toolsIcon/02-width.inline.svg';
+import ZoomInIcon from 'images/toolsIcon/04-zoom-in.inline.svg';
+import ZoomOutIcon from 'images/toolsIcon/05-zoom-out.inline.svg';
+import RotateLeftIcon from 'images/toolsIcon/06-rotate-left.inline.svg';
+import RotateRightIcon from 'images/toolsIcon/07-rotate-right.inline.svg';
+import LeftIcon from 'images/toolsIcon/left.inline.svg';
+import RightIcon from 'images/toolsIcon/right.inline.svg';
+
 import Fabric from 'layouts/Fabric';
 
 import styles from './index.css';
 
-interface PageProperty {
-	className?: string;
+interface ToolBarProperty {
+	upload: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
+	pages: number;
+	total: number;
 }
 
-interface ImagesProperty {
-	id: number;
-	url: string;
-}
-
-const ToolBar: React.FC = () => {
+const ToolBar: React.FC<ToolBarProperty> = ({ upload, pages, total }) => {
 	return (
 		<div className={styles.toolBar}>
-			<button type="button" className={styles.toolButton}>
-				<img src={HeightIcon} alt="icon" />
-			</button>
-			<button type="button" className={styles.toolButton}>
-				<img src="../../images/02-width.svg" alt="icon" />
-			</button>
-			<button type="button" className={styles.toolButton}>
-				<img src="../../images/04-zoom-in.svg" alt="icon" />
-			</button>
-			<button type="button" className={styles.toolButton}>
-				<img src="../../images/05-zoom-out.svg" alt="icon" />
-			</button>
-			<button type="button" className={styles.toolButton}>
-				<img src="../../images/06-rotate-left.svg" alt="icon" />
-			</button>
-			<button type="button" className={styles.toolButton}>
-				<img src="../../images/07-rotate-right.svg" alt="icon" />
-			</button>
-			<button type="button" className={styles.toolButton}>
-				<img src="../../images/08-fit.svg" alt="icon" />
-			</button>
+			<div className={styles.icons}>
+				<button type="button" className={styles.toolButton}>
+					<HeightIcon />
+				</button>
+				<button type="button" className={styles.toolButton}>
+					<WidthIcon />
+				</button>
+				<button type="button" className={styles.toolButton}>
+					<ZoomInIcon />
+				</button>
+				<button type="button" className={styles.toolButton}>
+					<ZoomOutIcon />
+				</button>
+				<button type="button" className={styles.toolButton}>
+					<RotateLeftIcon />
+				</button>
+				<button type="button" className={styles.toolButton}>
+					<RotateRightIcon />
+				</button>
+			</div>
 			<div className={styles.pageInfo}>
 				<button type="button" className={styles.toolButton}>
-					<img src="../../images/left.svg" alt="icon" />
+					<LeftIcon />
 				</button>
 				<div className={styles.pageNumber}>
-					<div className={styles.pageNow} />
+					<div className={styles.pageNow}>{pages + 1}</div>
 					<div className={styles.pageSlash}>/</div>
-					<div className={styles.pagetotal} />
+					<div className={styles.pagetotal}>{total}</div>
 				</div>
 				<button type="button" className={styles.toolButton}>
-					<img src="../../images/right.svg" alt="icon" />
+					<RightIcon />
 				</button>
 			</div>
 			<button type="button" className={styles.reUpload}>
-				<label htmlFor="reuploadFiles">重新上傳</label>
+				<label htmlFor="reuploadFiles">選擇檔案</label>
 				<input
 					id="reuploadFiles"
 					type="file"
@@ -68,9 +75,42 @@ const ToolBar: React.FC = () => {
 	);
 };
 
+interface PageProperty {
+	className?: string;
+}
+
+interface ImagesProperty {
+	id: number;
+	url: string;
+}
+
 const SheetDetailPage: React.FC<PageProperty> = ({ className }) => {
 	const [images, updateImages] = useState([]);
 	const [pages, updatePages] = useState(0);
+	const [
+		{
+			sheet: { sheetData, fabricCanvas, fabricCanvasParameters },
+		},
+		{ initFabric, updateFabricCanvasParameters },
+	] = useSheet();
+
+	const renderCanvas = (link: string) => {
+		fabric.Image.fromURL(link, img => {
+			const width = img.width || 0;
+			const height = img.height || 0;
+			updateFabricCanvasParameters({ key: 'imageOriginWidth', value: width });
+			updateFabricCanvasParameters({ key: 'imageOriginHeight', value: height });
+			updateFabricCanvasParameters({ key: 'proportion', value: width / height });
+			img.set({
+				selectable: false,
+				scaleX: fabricCanvasParameters.containerWidth / width,
+				scaleY: fabricCanvasParameters.containerWidth / width,
+			});
+			fabricCanvas.setWidth(fabricCanvasParameters.containerWidth);
+			fabricCanvas.setHeight(height * (fabricCanvasParameters.containerWidth / width));
+			fabricCanvas.add(img).renderAll();
+		});
+	};
 
 	const handleImage = (image: any, index: number) => {
 		return new Promise(resolve => {
@@ -85,6 +125,7 @@ const SheetDetailPage: React.FC<PageProperty> = ({ className }) => {
 	const upload = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { files } = event.target;
 		const uploadImages = [] as any;
+		fabricCanvas.clear();
 		updatePages(0);
 
 		if (files) {
@@ -96,12 +137,19 @@ const SheetDetailPage: React.FC<PageProperty> = ({ className }) => {
 			}
 			updateImages(uploadImages);
 		}
+
+		renderCanvas(uploadImages[0].url);
 	};
 
 	return (
 		<div className={classnames(styles.sheetDetail, className)}>
-			<ToolBar />
-			<Fabric />
+			<ToolBar upload={upload} pages={pages} total={images.length} />
+			<Fabric
+				fabricCanvas={fabricCanvas}
+				initFabric={initFabric}
+				sheetData={sheetData}
+				updateFabricCanvasParameters={updateFabricCanvasParameters}
+			/>
 			<div className={styles.results}>
 				{images.map((image: ImagesProperty) => (
 					<img key={image.id} src={image.url} alt={`${image.id}`} />

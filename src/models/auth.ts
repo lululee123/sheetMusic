@@ -6,6 +6,7 @@ import firebase from 'firebase';
 import storage from 'util/storage';
 
 import { openModal } from './modal';
+import { ImagesProperty } from './sheet';
 
 import { GetState, State as GlobalState } from './reducers';
 import history from '../store/history';
@@ -18,24 +19,43 @@ export interface GetDataActionState {
 	data: { [props: string]: string | number | boolean };
 }
 
-export const getData = createAction(
-	'GET_DATA',
-	(data: { [props: string]: string | number | boolean }) => ({ data }),
-);
+export const getUserData = createAction('GET_USER_DATA', (token: string) => async () => {
+	const data = await firebase
+		.database()
+		.ref(`users/${token}`)
+		.once('value')
+		.then((e: { val: () => { [props: string]: string | number | boolean } }) => {
+			return e.val() === null ? { list: {} } : e.val();
+		});
+	return { data };
+});
 
 export const saveTokenAndGetUserData = createAction(
-	'SAVE_ACCESS_TOKEN',
+	'SAVE_ACCESS_TOKEN_AND_GET_USER_DATA',
 	(token: string) => async (dispatch: Dispatch) => {
 		storage.setItem('token', JSON.stringify(token));
-		await firebase
-			.database()
-			.ref(`users/${token}`)
-			.once('value')
-			.then((e: { val: () => { [props: string]: string | number | boolean } }) => {
-				dispatch(e.val() === null ? getData({}) : getData(e.val()));
-			});
+		await dispatch(getUserData(token));
 
 		return { token };
+	},
+);
+
+export const updateUserData = createAction(
+	'UPDATE_USER_DATA',
+	(data: { [key: string]: ImagesProperty[] }) => async (dispatch: Dispatch, getState: GetState) => {
+		const {
+			auth: { token, data: firebaseData },
+		} = getState();
+
+		const newData = { ...firebaseData };
+		const key = Object.keys(data)[0];
+		newData.list[key] = data[key];
+		await firebase
+			.database()
+			.ref(`/users/${token}`)
+			.set(newData);
+
+		await dispatch(getUserData(token));
 	},
 );
 
@@ -209,7 +229,10 @@ export const initialState: State = {
 export const reducer = {
 	auth: handleActions<State, any>( // eslint-disable-line @typescript-eslint/no-explicit-any
 		{
-			SAVE_ACCESS_TOKEN: (state, action: Action<AuthTokenActionState>) => ({
+			SAVE_ACCESS_TOKEN_AND_GET_USER_DATA_FULFILLED: (
+				state,
+				action: Action<AuthTokenActionState>,
+			) => ({
 				...state,
 
 				token: action.payload.token,
@@ -223,7 +246,7 @@ export const reducer = {
 				},
 			}),
 
-			GET_DATA: (state, action: Action<GetDataActionState>) => ({
+			GET_USER_DATA_FULFILLED: (state, action: Action<GetDataActionState>) => ({
 				...state,
 
 				loading: false,
@@ -252,6 +275,7 @@ const authActionsMap = {
 	forget,
 	loginWithGoogle,
 	loginWithFaceBook,
+	updateUserData,
 };
 
 type AuthSelector = ReturnType<typeof mapHooksToState>;

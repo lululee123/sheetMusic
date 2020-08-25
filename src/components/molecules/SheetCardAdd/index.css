@@ -1,0 +1,17 @@
+.add {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	height: 100px;
+	border: 1px solid var(--mediumGray);
+	border-radius: 10px;
+	cursor: pointer;
+
+	& .title {
+		margin-top: 8px;
+		font-size: 14px;
+		color: var(--darkBlack);
+	}
+}
